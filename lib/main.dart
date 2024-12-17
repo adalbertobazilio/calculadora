@@ -1,11 +1,14 @@
-import 'dart:math';
-
+import 'package:calculadora/functions/functions.dart';
 import 'package:calculadora/ui/buttons.dart';
 import 'package:calculadora/ui/display.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (_) => Functions(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -15,19 +18,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      theme: ThemeData.dark(
         useMaterial3: true,
       ),
       home: Scaffold(
         appBar: AppBar(
-          title:
-              const Text(style: TextStyle(color: Colors.white), "Calculadora"),
-          backgroundColor: Colors.deepPurple,
+          title: const Text("Calculator"),
         ),
         body: const Column(
           children: [
-            Expanded(flex: 1, child: Display(value: "100")),
+            Expanded(flex: 2, child: Display()),
             Expanded(flex: 5, child: Buttons())
           ],
         ),

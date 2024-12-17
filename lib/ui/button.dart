@@ -1,4 +1,6 @@
+import 'package:calculadora/functions/functions.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Button extends StatelessWidget {
   final String value;
@@ -9,9 +11,17 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: color,
-      child: Text(value,
-      textAlign: TextAlign.center,
-      style: TextStyle(fontSize: 40),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            Provider.of<Functions>(context, listen: false).onClick(value);
+          },
+          child: Text(value,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 40),
+          ),
+        ),
       ),
     );
   }
